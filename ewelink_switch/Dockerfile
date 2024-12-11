@@ -1,8 +1,8 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
-RUN \
-  apk add --no-cache \
-  libstdc++6 gcc
+#RUN \
+#  apk add --no-cache \
+#  libstdc++6 gcc
 
 RUN curl -fsSL https://bun.sh/install | bash
 
