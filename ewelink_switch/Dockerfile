@@ -13,6 +13,7 @@ RUN curl -fsSL https://bun.sh/install | bash
 WORKDIR /data
 
 # Copy data for add-on
+COPY src /app
 COPY run.sh /
 RUN chmod a+x /run.sh
 

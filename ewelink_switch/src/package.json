@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "crypto-js": "^4.2.0"
+  },
+  "name": "src",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
