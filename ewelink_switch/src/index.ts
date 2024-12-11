@@ -65,7 +65,7 @@ Bun.serve({
     port: 8035,
     fetch(req) {
         const parsedUrl = new URL(req.url);
-        if (parsedUrl.pathname === '/action') {
+        if (parsedUrl.pathname === '/action' && req.method === "GET") {
             console.time('Generate payload');
             const urlParameters = { deviceid, devicekey, selfApikey, payload: '', host: '', ...Object.fromEntries(parsedUrl.searchParams.entries()) };
             if (!urlParameters.host) {
