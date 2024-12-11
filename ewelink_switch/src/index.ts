@@ -75,7 +75,6 @@ Bun.serve({
                 method: 'POST',
                 headers: {
                     Host: urlParameters.host,
-                    Connection: 'keep-alive',
                     Accept: 'application/json',
                     'User-Agent': 'eWeLink_IOS/v5.11.0',
                     'Cache-Control': 'no-store',
@@ -87,6 +86,7 @@ Bun.serve({
                     urlParameters.payload ? JSON.parse(urlParameters.payload) : { switch: 'off' }
                 ))
             };
+            // console.error(options, urlParameters.payload)
             return fetch(`http://${urlParameters.host}/zeroconf/switch`, options);
         }
         return new Response("ok");
