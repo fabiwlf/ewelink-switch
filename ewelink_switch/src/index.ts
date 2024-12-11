@@ -58,11 +58,42 @@ const constructRequest = (deviceid, devicekey, selfApikey, payload) => {
             key: devicekey,
         }),
     };
-    console.log(reqData);
+    return reqData;
 };
-
-const [, , deviceid, devicekey, selfApikey, initialPayload] = process.argv;
+const [, , deviceid, devicekey, selfApikey] = process.argv;
+Bun.serve({
+    port: 8035,
+    fetch(req) {
+        const parsedUrl = new URL(req.url);
+        if (parsedUrl.pathname === '/action') {
+            const urlParameters = { deviceid, devicekey, selfApikey, payload: '', host: '', ...Object.fromEntries(parsedUrl.searchParams.entries()) };
+            if (!urlParameters.host) {
+                return new Response("host missing");
+            }
+            console.log('urlParameters', urlParameters);
+            const options = {
+                method: 'POST',
+                headers: {
+                    Host: urlParameters.host,
+                    Connection: 'keep-alive',
+                    Accept: 'application/json',
+                    'User-Agent': 'eWeLink_IOS/v5.11.0',
+                    'Cache-Control': 'no-store',
+                    'Accept-Language': 'en-GB,en;q=0.9',
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                body: JSON.stringify(constructRequest(
+                    urlParameters.deviceid, urlParameters.devicekey, urlParameters.selfApikey,
+                    urlParameters.payload ? JSON.parse(urlParameters.payload) : { switch: 'off' }
+                ))
+            };
+            return fetch(`http://${urlParameters.host}/zeroconf/switch`, options);
+        }
+        return new Response("ok");
+    },
+});
+/* const [, , deviceid, devicekey, selfApikey, initialPayload] = process.argv;
 constructRequest(
     deviceid, devicekey, selfApikey,
     initialPayload ? JSON.parse(initialPayload) : { switch: 'off' }
-);
+); */
