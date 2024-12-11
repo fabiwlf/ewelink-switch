@@ -1,6 +1,6 @@
 name: "Ewelink Switch"
 description: "Ewelink Switch"
-version: "2.1.7"
+version: "2.1.8"
 slug: "ewelink_switch"
 init: false
 arch:
@@ -19,5 +19,5 @@ schema:
   apikey: str
 ports:
   8035/tcp: 8035
-#map:
-#  - backup:rw
+map:
+  - share:rw
