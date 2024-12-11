@@ -66,6 +66,7 @@ Bun.serve({
     fetch(req) {
         const parsedUrl = new URL(req.url);
         if (parsedUrl.pathname === '/action') {
+            console.time('Generate payload');
             const urlParameters = { deviceid, devicekey, selfApikey, payload: '', host: '', ...Object.fromEntries(parsedUrl.searchParams.entries()) };
             if (!urlParameters.host) {
                 return new Response("host missing");
@@ -86,6 +87,7 @@ Bun.serve({
                     urlParameters.payload ? JSON.parse(urlParameters.payload) : { switch: 'off' }
                 ))
             };
+            console.timeEnd('Generate payload');
             // console.error(options, urlParameters.payload)
             return fetch(`http://${urlParameters.host}/zeroconf/switch`, options);
         }
