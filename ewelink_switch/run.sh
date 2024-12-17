@@ -6,7 +6,7 @@ echo "Hello world!, config: $(bashio::config 'apikey')"
 #cd /app
 #bun install
 #bun ./index.ts $(bashio::config 'deviceid') $(bashio::config 'devicekey') $(bashio::config 'apikey') '{ "switch": "off" }' < /dev/null &
-/ewelink_switch $(bashio::config 'deviceid') $(bashio::config 'devicekey') $(bashio::config 'apikey') '{ "switch": "off" }' < /dev/null &
+ewelink_switch $(bashio::config 'deviceid') $(bashio::config 'devicekey') $(bashio::config 'apikey') '{ "switch": "off" }' < /dev/null &
 #https://github.com/home-assistant/addons/blob/5dc039373ac85eced80fd33282300e561e853186/tellstick/data/run.sh
 while read -r input; do
     bashio::log.info "Read <${input}>"
