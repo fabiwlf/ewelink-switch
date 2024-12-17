@@ -3,7 +3,7 @@ import process from 'process';
 
 var LanControlAuthenticationUtils = (function () {
     function LanControlAuthenticationUtils() { }
-    LanControlAuthenticationUtils.encryptionData = function (_a) {
+    LanControlAuthenticationUtils.encryptionData = function (_a: { iv: any; key: any; data: any; }) {
         var iv = _a.iv,
             key = _a.key,
             data = _a.data;
@@ -15,11 +15,11 @@ var LanControlAuthenticationUtils = (function () {
             });
             var base64Cipher = cipher.ciphertext.toString(crypto_js_1.enc.Base64);
             return base64Cipher;
-        } catch (e) {
-            console.error('encryptionData error: '.concat(e));
+        } catch (e: unknown) {
+            console.error('encryptionData error:', e);
         }
     };
-    LanControlAuthenticationUtils.decryptionData = function (_a) {
+    LanControlAuthenticationUtils.decryptionData = function (_a: { iv: any; key: any; data: any; }) {
         var iv = _a.iv,
             key = _a.key,
             data = _a.data;
@@ -31,10 +31,10 @@ var LanControlAuthenticationUtils = (function () {
         var decryptedData = bytes.toString(crypto_js_1.enc.Utf8);
         return decryptedData;
     };
-    LanControlAuthenticationUtils.encryptionBase64 = function (str) {
+    LanControlAuthenticationUtils.encryptionBase64 = function (str: string) {
         return crypto_js_1.enc.Base64.stringify(crypto_js_1.enc.Utf8.parse(str));
     };
-    LanControlAuthenticationUtils.decryptionBase64 = function (base64Str) {
+    LanControlAuthenticationUtils.decryptionBase64 = function (base64Str: string) {
         return crypto_js_1.enc.Base64.parse(base64Str).toString(
             crypto_js_1.enc.Utf8
         );
@@ -43,7 +43,7 @@ var LanControlAuthenticationUtils = (function () {
 })();
 
 // https://github.com/CoolKit-Technologies/ha-addon/blob/master/eWeLink_Smart_Home/dist/apis/lanDeviceApi.js
-const constructRequest = (deviceid, devicekey, selfApikey, payload) => {
+const constructRequest = (deviceid: string, devicekey: string, selfApikey: string, payload: any) => {
     var iv = 'abcdef'.concat(Date.now().toString(), 'abcdef').slice(0, 16);
     const data = JSON.stringify(payload);
     const reqData = {

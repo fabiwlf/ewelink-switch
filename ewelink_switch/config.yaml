@@ -1,6 +1,6 @@
 name: "Ewelink Switch"
 description: "Ewelink Switch"
-version: "2.2.3"
+version: "2.2.4"
 slug: "ewelink_switch"
 init: false
 arch:
@@ -21,3 +21,4 @@ ports:
   8035/tcp: 8035
 map:
   - share:rw
+stdin: true
