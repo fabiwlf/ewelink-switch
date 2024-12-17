@@ -1,6 +1,6 @@
 name: "Ewelink Switch"
 description: "Ewelink Switch"
-version: "3.0.2"
+version: "3.0.3"
 slug: "ewelink_switch"
 init: false
 arch:
