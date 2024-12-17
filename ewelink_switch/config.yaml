@@ -22,3 +22,4 @@ ports:
 map:
   - share:rw
 stdin: true
+image: "ghcr.io/fabiwlf/{arch}-ewelink-switch"
