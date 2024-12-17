@@ -14,6 +14,11 @@ WORKDIR /data
 
 # Copy data for add-on
 COPY src /app
+RUN export BUN_INSTALL="$HOME/.bun" && \
+    export PATH="$BUN_INSTALL/bin:$PATH" && \
+    bash -c "cd /app && bun install && bun build --compile --minify --bytecode ./index.ts --outfile /ewelink_switch" && \
+    rm -r /app && \
+    chmod a+x /ewelink_switch
 COPY run.sh /
 RUN chmod a+x /run.sh
 

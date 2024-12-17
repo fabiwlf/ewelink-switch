@@ -60,6 +60,7 @@ const constructRequest = (deviceid: string, devicekey: string, selfApikey: strin
     };
     return reqData;
 };
+console.log('Starting application...');
 const [, , deviceid, devicekey, selfApikey] = process.argv;
 Bun.serve({
     port: 8035,
