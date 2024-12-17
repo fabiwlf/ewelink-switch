@@ -1,8 +1,10 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
-#RUN \
-#  apk add --no-cache \
-#  libstdc++6 gcc
+RUN \
+  apk add --no-cache \
+  libc6-compat gcompat
+
+#libstdc++6 gcc
 
 #RUN curl -fsSL https://bun.sh/install | bash
 
@@ -14,6 +16,7 @@ WORKDIR /data
 ARG BUILD_ARCH
 # Copy data for add-on
 COPY src/$BUILD_ARCH-ewelink_switch /
+RUN ln -s /$BUILD_ARCH-ewelink_switch /usr/bin/ewelink_switch && chmod a+x /usr/bin/ewelink_switch
 #RUN mv /$BUILD_ARCH-ewelink_switch /usr/bin/ewelink_switch && chmod a+x /usr/bin/ewelink_switch
 #RUN export BUN_INSTALL="$HOME/.bun" && \
 #    export PATH="$BUN_INSTALL/bin:$PATH" && \
