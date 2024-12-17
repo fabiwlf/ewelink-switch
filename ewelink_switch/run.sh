@@ -9,7 +9,9 @@ bun ./index.ts $(bashio::config 'deviceid') $(bashio::config 'devicekey') $(bash
 #https://github.com/home-assistant/addons/blob/5dc039373ac85eced80fd33282300e561e853186/tellstick/data/run.sh
 while read -r input; do
     bashio::log.info "Read <${input}>"
-    bash -c "${input}" || true
+    temp="${input%\"}"
+    temp="${temp#\"}"
+    bash -c "${temp}" || true
 done
 
 #curl "localhost:8035/action?host=192.168.178.68%3A8081&payload=%7B%22switch%22%3A%22off%22%7D"
