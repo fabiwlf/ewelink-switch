@@ -1,6 +1,6 @@
 name: "Ewelink Switch"
 description: "Ewelink Switch"
-version: "3.0.8"
+version: "3.0.9"
 slug: "ewelink_switch"
 init: false
 arch:
@@ -17,8 +17,8 @@ schema:
   deviceid: str
   devicekey: str
   apikey: str
-ports:
-  8035/tcp: 8035
+#ports:
+#  8035/tcp: 8035
 map:
   - share:rw
 stdin: true

@@ -68,11 +68,12 @@ Bun.serve({
         const parsedUrl = new URL(req.url);
         if (parsedUrl.pathname === '/action' && req.method === "GET") {
             console.time('Generate payload');
-            const urlParameters = { deviceid, devicekey, selfApikey, payload: '', host: '', ...Object.fromEntries(parsedUrl.searchParams.entries()) };
+            const urlParameters = { deviceid, devicekey, selfApikey, payload: '', host: '', dry: false, ...Object.fromEntries(parsedUrl.searchParams.entries()) };
             if (!urlParameters.host) {
                 return new Response("host missing");
             }
             console.log('urlParameters', urlParameters);
+            const url = `http://${urlParameters.host}/zeroconf/switch`;
             const options = {
                 method: 'POST',
                 headers: {
@@ -89,8 +90,15 @@ Bun.serve({
                 ))
             };
             console.timeEnd('Generate payload');
+            if (urlParameters.dry) {
+                return new Response(JSON.stringify({ url, options }), {
+                    headers: {
+                        'Content-Type': 'application/json;charset=UTF-8'
+                    }
+                });
+            }
             // console.error(options, urlParameters.payload)
-            return fetch(`http://${urlParameters.host}/zeroconf/switch`, options);
+            return fetch(url, options);
         }
         return new Response("ok");
     },
