@@ -1,8 +1,8 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
-RUN \
-  apk add --no-cache \
-  libc6-compat gcompat
+#RUN \
+#  apk add --no-cache \
+#  libc6-compat gcompat
 
 #libstdc++6 gcc
 

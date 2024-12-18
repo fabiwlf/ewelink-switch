@@ -116,7 +116,7 @@ jobs:
             export PBUN_TARGET="bun-linux-arm64"
           fi
           set -x
-          bash -c "cd ./ewelink_switch/src && bun install && bun build --compile --target=$PBUN_TARGET --minify --bytecode --sourcemap ./index.ts --outfile \"${{ matrix.arch }}-${{ matrix.addon }}\" && chmod a+x ./${{ matrix.arch }}-${{ matrix.addon }}"
+          bash -c "cd ./ewelink_switch/src && bun install --production --no-cache && bun build --compile --target=$PBUN_TARGET --minify --bytecode --sourcemap ./index.ts --outfile \"${{ matrix.arch }}-${{ matrix.addon }}\" && chmod a+x ./${{ matrix.arch }}-${{ matrix.addon }}"
 
       - name: Build ${{ matrix.addon }} add-on
         if: steps.check.outputs.build_arch == 'true'
